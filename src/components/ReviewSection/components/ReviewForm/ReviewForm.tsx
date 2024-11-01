@@ -21,6 +21,7 @@ const ReviewForm = () => {
 
   const submitReviewHandler: React.FormEventHandler<HTMLFormElement> = (ev) => {
     ev.preventDefault()
+    setReviewError("");
 
     if (review.length>100) {
       setReviewError("Review must be maximum 100 chars");

@@ -1,4 +1,4 @@
-import {ICompany, IMovie, IMovieData} from "../../src/types/movies";
+import {ICompany, IMovie} from "../../src/types/movies";
 
 export const mockedMoviesState1 = {
   movies: {
