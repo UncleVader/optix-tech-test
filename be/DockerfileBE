@@ -1,0 +1,19 @@
+from node:18-alpine
+
+RUN npm install -g nodemon
+
+# Create app directory
+WORKDIR /app
+
+# Install app dependencies
+COPY package.json .
+
+RUN npm install
+
+# Build the app
+COPY . .
+
+EXPOSE 3000
+
+CMD ["npm", "run", "start"]
+

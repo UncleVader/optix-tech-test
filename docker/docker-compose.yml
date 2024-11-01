@@ -1,4 +1,11 @@
 services:
+  node:
+    build:
+      context: ../be
+      dockerfile: DockerfileBE
+    container_name: optix-be
+    ports:
+      - '3000:3000'
   optix:
     build: 
       context: ..
