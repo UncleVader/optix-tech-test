@@ -1,4 +1,5 @@
 import React, {FC} from 'react';
+import {Button} from "@mui/material";
 
 interface IProps {
   buttonText: string;
@@ -9,7 +10,7 @@ interface IProps {
 const RefreshButton: FC<IProps> = ({buttonText, moviesLength, onClick}) => {
   return (
     moviesLength
-      ? <button onClick={() => onClick()}>{buttonText}</button>
+      ? <Button variant={"outlined"} onClick={() => onClick()}>{buttonText}</Button>
       : <p>No movies loaded yet</p>
   )
 };

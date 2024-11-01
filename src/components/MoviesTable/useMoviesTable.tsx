@@ -16,7 +16,7 @@ const useMoviesTable = (movies:IMovie[], companies:ICompany[]) => {
     {
       field: 'title',
       headerName: 'Title',
-      width: 150,
+      width: 250,
     },
     {
       field: 'averageReview',

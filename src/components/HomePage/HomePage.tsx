@@ -1,7 +1,6 @@
-import React, {useMemo, useState} from 'react';
+import React, {useMemo} from 'react';
 import {Box} from "@mui/material";
 import useMovies from "../../hooks/useMovies";
-import {IMovie} from "../../types/movies";
 import RefreshButton from "../ui/RefreshButton";
 import {SelectedMovie} from "../SelectedMovie";
 import MoviesTable from "../MoviesTable/MoviesTable";
@@ -9,7 +8,6 @@ import MoviesTableSkeleton from "../MoviesTable/MoviesTableSkeleton";
 import ErrorSnackbar from "../ui/ErrorSnackbar";
 
 const HomePage = () => {
-  const [selectedMovie, setSelectedMovie] = useState<IMovie | undefined>();
 
   const {
     movies,
@@ -17,7 +15,9 @@ const HomePage = () => {
     isLoading,
     error,
     setError,
-    setResetFlag
+    setResetFlag,
+    selectedMovie,
+    setSelectedMovieId,
   } = useMovies()
 
   const moviesLength = useMemo(() => movies?.length || 0, [movies])
@@ -38,7 +38,12 @@ const HomePage = () => {
 
         {isLoading
           ? <MoviesTableSkeleton />
-          : <MoviesTable movies={movies} companies={companies} setSelectedMovie={setSelectedMovie}/>
+          :
+          <MoviesTable
+            movies={movies}
+            companies={companies}
+            setSelectedMovieId={setSelectedMovieId}
+          />
         }
         <br/>
 
