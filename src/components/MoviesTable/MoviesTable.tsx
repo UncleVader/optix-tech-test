@@ -22,6 +22,7 @@ const MoviesTable:FC<IProps> = (
 
   return (
     <DataGrid
+      data-testid={"movies-datagrid"}
       rows={data}
       columns={columns}
       initialState={{

@@ -46,7 +46,7 @@ const ReviewForm = () => {
 
       {selectedMovie && <p>Please leave a review below</p> }
       {selectedMovie &&
-        <form onSubmit={submitReviewHandler}>
+        <form onSubmit={submitReviewHandler} data-testid={"review-form"}>
           <Stack spacing={1} maxWidth={300}>
             <TextField
               required
