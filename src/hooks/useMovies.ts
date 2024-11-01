@@ -1,7 +1,10 @@
-import {useCallback, useEffect, useState} from "react";
+import {useCallback, useEffect, useMemo, useState} from "react";
 import {ICompany, IMovie} from "../types/movies";
 import {getMovieCompanies, getMovies} from "../api/movies";
 import {AxiosError} from "axios";
+import {setSelectedMovie as setSelectedMovieAction} from "../store/moviesSlice";
+import {useAppDispatch, useAppSelector} from "../store/useStore";
+import {RootState} from "../store/store";
 
 const useMovies = () => {
   const [isLoading, setIsLoading] = useState(false)
@@ -9,13 +12,16 @@ const useMovies = () => {
   const [companies, setCompanies] = useState<Array<ICompany>>([])
   const [error, setError] = useState('')
   const [resetFlag, setResetFlag] = useState(0)
-  const [selectedMovieId, setSelectedMovieId] = useState<string>('');
-  const [selectedMovie, setSelectedMovie] = useState<IMovie|undefined>();
+  const moviesLength = useMemo(() => movies?.length || 0, [movies])
+
+  const dispatch = useAppDispatch()
+  const selectedMovie = useAppSelector((state: RootState) => state.movies.selectedMovie)
+  const setSelectedMovie = (movie:IMovie|undefined) => dispatch(setSelectedMovieAction(movie))
 
   const resetState = useCallback(() => {
     setMovies([])
     setSelectedMovie(undefined)
-    setSelectedMovieId('')
+    setSelectedMovie(undefined)
   },[])
 
   useEffect(() => {
@@ -32,7 +38,7 @@ const useMovies = () => {
       })
       .catch(error => {
         if (error instanceof AxiosError) {
-          const errorData: string = error.response?.data || 'Something went wrong, please try again';
+          const errorData: string = ("" + error.response?.data) || 'Something went wrong, please try again';
           setError(errorData);
         }
         resetState()
@@ -44,19 +50,15 @@ const useMovies = () => {
   }, [resetFlag])
 
 
-  useEffect(() => {
-    setSelectedMovie(movies.find(m => m.id===selectedMovieId))
-  }, [selectedMovieId])
-
   return {
     isLoading,
     movies,
+    moviesLength,
     companies,
     error,
     setError,
     setResetFlag,
     selectedMovie,
-    setSelectedMovieId,
   }
 }
 export default useMovies

@@ -5,7 +5,7 @@ const MoviesTableSkeleton = () => {
   return (
     <Stack width={"100%"} spacing={1}>
       <>
-        {Array.from(Array(5)).map(_ => <Skeleton variant="rectangular" width={"100%"} height={30}/>)}
+        {Array.from(Array(5)).map((_,i) => <Skeleton key={i} variant="rectangular" width={"100%"} height={30}/>)}
       </>
     </Stack>
   );

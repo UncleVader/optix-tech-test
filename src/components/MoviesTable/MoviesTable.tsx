@@ -1,26 +1,23 @@
-import React, {Dispatch, FC, SetStateAction} from 'react';
+import React, {FC} from 'react';
 import {ICompany, IMovie} from "../../types/movies";
-import {DataGrid, GridRowParams, GridRowSelectionModel} from '@mui/x-data-grid';
+import {DataGrid, GridRowSelectionModel} from '@mui/x-data-grid';
 import useMoviesTable from "./useMoviesTable";
-
-
 
 interface IProps {
   movies: Array<IMovie>;
   companies: Array<ICompany>;
-  setSelectedMovieId: Dispatch<SetStateAction<string>>
 }
 
 const MoviesTable:FC<IProps> = (
   {
     movies,
     companies,
-    setSelectedMovieId
   }) =>
 {
   const {
     data,
-    columns
+    columns,
+    setSelectedMovie
   } = useMoviesTable(movies, companies)
 
   return (
@@ -37,7 +34,7 @@ const MoviesTable:FC<IProps> = (
       pageSizeOptions={[5]}
       hideFooterSelectedRowCount={true}
       onRowSelectionModelChange={(rowSelectionModel: GridRowSelectionModel) => {
-        setSelectedMovieId(rowSelectionModel[0] as string)
+        setSelectedMovie(movies.find(m => m.id===rowSelectionModel[0]))
       }}
     />
   );

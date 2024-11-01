@@ -1,8 +1,13 @@
 import {GridColDef} from "@mui/x-data-grid";
 import {ICompany, IMovie, IMovieData} from "../../types/movies";
 import {useMemo} from "react";
+import {useAppDispatch} from "../../store/useStore";
+import {setSelectedMovie as setSelectedMovieAction} from "../../store/moviesSlice";
 
 const useMoviesTable = (movies:IMovie[], companies:ICompany[]) => {
+  const dispatch = useAppDispatch()
+  const setSelectedMovie = (movie:IMovie|undefined) => dispatch(setSelectedMovieAction(movie))
+
   const moviesData:IMovieData[] = useMemo(() => movies.map(m => {
     return {
       id: m.id,
@@ -33,7 +38,8 @@ const useMoviesTable = (movies:IMovie[], companies:ICompany[]) => {
 
   return {
     data: moviesData,
-    columns
+    columns,
+    setSelectedMovie
   }
 }
 

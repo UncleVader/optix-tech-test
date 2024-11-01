@@ -1,4 +1,3 @@
-import React, {useMemo} from 'react';
 import {Box} from "@mui/material";
 import useMovies from "../../hooks/useMovies";
 import RefreshButton from "../ui/RefreshButton";
@@ -6,21 +5,20 @@ import {SelectedMovie} from "../SelectedMovie";
 import MoviesTable from "../MoviesTable/MoviesTable";
 import MoviesTableSkeleton from "../MoviesTable/MoviesTableSkeleton";
 import ErrorSnackbar from "../ui/ErrorSnackbar";
+import ReviewSection from "../ReviewSection/ReviewSection";
 
 const HomePage = () => {
 
   const {
     movies,
+    moviesLength,
     companies,
     isLoading,
     error,
     setError,
     setResetFlag,
-    selectedMovie,
-    setSelectedMovieId,
   } = useMovies()
 
-  const moviesLength = useMemo(() => movies?.length || 0, [movies])
 
   return (
     <Box>
@@ -42,12 +40,14 @@ const HomePage = () => {
           <MoviesTable
             movies={movies}
             companies={companies}
-            setSelectedMovieId={setSelectedMovieId}
           />
         }
+
         <br/>
 
-        <SelectedMovie movie={selectedMovie}/>
+        <SelectedMovie />
+
+        <ReviewSection />
       </>
     </Box>
   );
