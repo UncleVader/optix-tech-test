@@ -30,6 +30,8 @@ const HomePage = () => {
           buttonText={"Refresh"}
           moviesLength={moviesLength}
           onClick={() => setResetFlag(Date.now())}
+          error={error}
+          disabled={isLoading}
         />
 
         <p>Total movies displayed {moviesLength}</p>

@@ -21,11 +21,11 @@ const useMovies = () => {
   const resetState = useCallback(() => {
     setMovies([])
     setSelectedMovie(undefined)
-    setSelectedMovie(undefined)
   },[])
 
   useEffect(() => {
     resetState()
+    setError('')
     setIsLoading(true)
 
     //emulating real fetching delay
@@ -33,7 +33,7 @@ const useMovies = () => {
 
 
     Promise.all([getMovies(), getMovieCompanies(), delay()])
-      .then((res) => {
+      .then(async (res) => {
         setMovies(res[0])
         setCompanies(res[1])
       })

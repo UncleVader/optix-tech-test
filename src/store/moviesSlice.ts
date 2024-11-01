@@ -6,7 +6,7 @@ export interface MoviesState {
 }
 
 export const initialState: MoviesState = {
-  selectedMovie: undefined
+  selectedMovie: undefined,
 }
 
 export const moviesSlice = createSlice({
@@ -16,7 +16,6 @@ export const moviesSlice = createSlice({
     setSelectedMovie: (state, action: PayloadAction<IMovie | undefined>) => {
       state.selectedMovie = action.payload
     },
-
   }
 })
 
