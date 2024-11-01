@@ -1,0 +1,7 @@
+services:
+  optix:
+    build: 
+      context: ..
+      dockerfile: docker/Dockerfile
+    ports:
+      - "8000:8000"

@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import {ICompany, IMovie} from "../../types/movies";
 import {DataGrid, GridRowSelectionModel} from '@mui/x-data-grid';
-import useMoviesTable from "./useMoviesTable";
+import useMoviesTable from "../../hooks/useMoviesTable";
 
 interface IProps {
   movies: Array<IMovie>;

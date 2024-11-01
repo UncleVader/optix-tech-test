@@ -1,7 +1,7 @@
 import {useAppSelector} from "../../store/useStore";
 import {RootState} from "../../store/store";
 
-const SelectedMovie = () => {
+const SelectedMovieSection = () => {
   const selectedMovie = useAppSelector((state: RootState) => state.movies.selectedMovie)
 
   return (
@@ -11,4 +11,4 @@ const SelectedMovie = () => {
   );
 };
 
-export default SelectedMovie;
+export default SelectedMovieSection;

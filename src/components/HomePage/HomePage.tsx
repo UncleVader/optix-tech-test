@@ -1,11 +1,11 @@
 import {Box} from "@mui/material";
 import useMovies from "../../hooks/useMovies";
 import RefreshButton from "../ui/RefreshButton";
-import {SelectedMovie} from "../SelectedMovie";
 import MoviesTable from "../MoviesTable/MoviesTable";
 import MoviesTableSkeleton from "../MoviesTable/MoviesTableSkeleton";
 import ErrorSnackbar from "../ui/ErrorSnackbar";
 import ReviewSection from "../ReviewSection/ReviewSection";
+import {SelectedMovieSection} from "../SelectedMovieSection";
 
 const HomePage = () => {
 
@@ -45,7 +45,7 @@ const HomePage = () => {
 
         <br/>
 
-        <SelectedMovie />
+        <SelectedMovieSection />
 
         <ReviewSection />
       </>

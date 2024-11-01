@@ -28,6 +28,7 @@ const useMovies = () => {
     resetState()
     setIsLoading(true)
 
+    //emulating real fetching delay
     const delay = () => new Promise<void>(resolve => setTimeout(() => resolve(), 1000))
 
 

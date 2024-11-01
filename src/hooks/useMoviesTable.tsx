@@ -1,8 +1,8 @@
 import {GridColDef} from "@mui/x-data-grid";
-import {ICompany, IMovie, IMovieData} from "../../types/movies";
+import {ICompany, IMovie, IMovieData} from "../types/movies";
 import {useMemo} from "react";
-import {useAppDispatch} from "../../store/useStore";
-import {setSelectedMovie as setSelectedMovieAction} from "../../store/moviesSlice";
+import {useAppDispatch} from "../store/useStore";
+import {setSelectedMovie as setSelectedMovieAction} from "../store/moviesSlice";
 
 const useMoviesTable = (movies:IMovie[], companies:ICompany[]) => {
   const dispatch = useAppDispatch()
