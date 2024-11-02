@@ -33,7 +33,7 @@ const useMovies = () => {
 
 
     Promise.all([getMovies(), getMovieCompanies(), delay()])
-      .then(async (res) => {
+      .then((res) => {
         setMovies(res[0])
         setCompanies(res[1])
       })
