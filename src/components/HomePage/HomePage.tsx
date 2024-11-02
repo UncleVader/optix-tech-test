@@ -1,11 +1,12 @@
+import {lazy, Suspense} from "react"
 import {Box} from "@mui/material";
 import useMovies from "../../hooks/useMovies";
 import RefreshButton from "../ui/RefreshButton";
-import MoviesTable from "../MoviesTable/MoviesTable";
+const MoviesTable = lazy(() => import("../MoviesTable/MoviesTable"));
 import MoviesTableSkeleton from "../MoviesTable/MoviesTableSkeleton";
-import ErrorSnackbar from "../ui/ErrorSnackbar";
-import ReviewSection from "../ReviewSection/ReviewSection";
-import {SelectedMovieSection} from "../SelectedMovieSection";
+const ErrorSnackbar = lazy(() => import("../ui/ErrorSnackbar"));
+const ReviewSection = lazy(() => import("../ReviewSection/ReviewSection"));
+const SelectedMovieSection = lazy(() => import("../SelectedMovieSection/SelectedMovieSection"));
 
 const HomePage = () => {
 
@@ -21,37 +22,40 @@ const HomePage = () => {
 
 
   return (
-    <Box>
-      <>
-        <ErrorSnackbar error={error} setError={setError}/>
+    <Suspense fallback={"Loading..."}>
 
-        <h2>Welcome to Movie database!</h2>
-        <RefreshButton
-          buttonText={"Refresh"}
-          moviesLength={moviesLength}
-          onClick={() => setResetFlag(Date.now())}
-          error={error}
-          disabled={isLoading}
-        />
+      <Box>
+        <>
+          <ErrorSnackbar error={error} setError={setError}/>
 
-        <p>Total movies displayed {moviesLength}</p>
-
-        {isLoading
-          ? <MoviesTableSkeleton />
-          :
-          <MoviesTable
-            movies={movies}
-            companies={companies}
+          <h2>Welcome to Movie database!</h2>
+          <RefreshButton
+            buttonText={"Refresh"}
+            moviesLength={moviesLength}
+            onClick={() => setResetFlag(Date.now())}
+            error={error}
+            disabled={isLoading}
           />
-        }
 
-        <br/>
+          <p>Total movies displayed {moviesLength}</p>
 
-        <SelectedMovieSection />
+          {isLoading
+            ? <MoviesTableSkeleton/>
+            :
+            <MoviesTable
+              movies={movies}
+              companies={companies}
+            />
+          }
 
-        <ReviewSection />
-      </>
-    </Box>
+          <br/>
+
+          <SelectedMovieSection/>
+
+          <ReviewSection/>
+        </>
+      </Box>
+    </Suspense>
   );
 };
 
